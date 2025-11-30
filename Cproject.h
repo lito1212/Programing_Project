@@ -11,5 +11,3 @@ void toLowerCase();
 void reviewWrongWords();
 void Test();
 void searchWord();
-void loadStats();
-void saveStats();

@@ -1,14 +1,9 @@
 ﻿  Cproject.c
-C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(111,15): warning C4474: 'fscanf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-      C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(111,15):
-      자리 표시자 및 해당 매개 변수에는 variadic 인수가 2개 필요하지만 3개가 제공되었습니다.
-  
-C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(133,86): warning C4474: 'fprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-      C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(133,86):
-      자리 표시자 및 해당 매개 변수에는 variadic 인수가 2개 필요하지만 3개가 제공되었습니다.
-  
-C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(297,11): warning C4566: 유니버설 문자 이름 '\u2713'(으)로 표현되는 문자는 현재 코드 페이지(949)에서 표현할 수 없습니다.
-C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(301,11): warning C4566: 유니버설 문자 이름 '\u2717'(으)로 표현되는 문자는 현재 코드 페이지(949)에서 표현할 수 없습니다.
-C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(398,11): warning C4566: 유니버설 문자 이름 '\u2713'(으)로 표현되는 문자는 현재 코드 페이지(949)에서 표현할 수 없습니다.
-C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(402,11): warning C4566: 유니버설 문자 이름 '\u2717'(으)로 표현되는 문자는 현재 코드 페이지(949)에서 표현할 수 없습니다.
+C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(278,11): warning C4566: 유니버설 문자 이름 '\u2713'(으)로 표현되는 문자는 현재 코드 페이지(949)에서 표현할 수 없습니다.
+C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(282,11): warning C4566: 유니버설 문자 이름 '\u2717'(으)로 표현되는 문자는 현재 코드 페이지(949)에서 표현할 수 없습니다.
+C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(373,11): warning C4566: 유니버설 문자 이름 '\u2713'(으)로 표현되는 문자는 현재 코드 페이지(949)에서 표현할 수 없습니다.
+C:\Users\seung\OneDrive\Desktop\C_Project\Cproject.c(377,11): warning C4566: 유니버설 문자 이름 '\u2717'(으)로 표현되는 문자는 현재 코드 페이지(949)에서 표현할 수 없습니다.
+  main.c
+C:\Users\seung\OneDrive\Desktop\C_Project\main.c(29,8): warning C4244: '함수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
   C_Project.vcxproj -> C:\Users\seung\OneDrive\Desktop\C_Project\x64\Debug\C_Project.exe

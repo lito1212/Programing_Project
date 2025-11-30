@@ -1,8 +1,3 @@
-apple|사과
-apple|사과
-apple|사과
-banana|바나나
-apple|사과
-banana|바나나
-apple|사과
-banana|바나나
+apple|사과|1
+banana|바나나|0
+peach|복숭아|1

@@ -30,7 +30,6 @@ int main()
 	printf("=== 영단어 암기 프로그램 ===\n");
 
 	loadWords();
-	loadStats();
 
 	while (1)
 	{
@@ -68,11 +67,7 @@ int main()
 			reviewWrongWords();
 			break;
 		case 7:
-			showStatistics();
-			break;
-		case 8:
 			saveWords();
-			saveStats();
 			printf("저장 완료! 프로그램을 종료합니다.\n");
 			return 0;
 		default:

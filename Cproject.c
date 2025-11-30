@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 #include <ctype.h>
 #include "Cproject.h"
 
 #define MAX_WORDS 100
 #define MAX_LENGTH 50
 #define FILENAME "vocabulary.txt"
-#define STATS_FILENAME "stats.txt"
 
 
 typedef struct {
@@ -35,8 +35,7 @@ void Menu()
 	printf("4. 단어 삭제\n");
 	printf("5. 단어 시험\n");
 	printf("6. 틀린 단어 복습\n");
-	printf("7. 학습 통계\n");
-	printf("8. 종료\n");
+	printf("7. 종료\n");
 }
 void clearInputBuffer()
 {
@@ -84,6 +83,7 @@ void viewWords()
 		printf("저장된 단어가 없습니다.\n\n");
 		return;
 	}
+
 	printf("=== 단어 목록 ===\n");
 	for (int i = 0; i < word_count; i++)
 	{
@@ -105,7 +105,7 @@ void loadWords()
 
 	word_count = 0;
 
-	while (fscanf(file, "%[^|]|%[^\n]\n",
+	while (fscanf(file, "%[^|]|%[^|]|%d\n",
 		            vocabulary[word_count].english,
 		            vocabulary[word_count].korean,
 		            &vocabulary[word_count].wrongcount) == 3)
@@ -114,13 +114,12 @@ void loadWords()
 		if (word_count >= MAX_WORDS)
 			break;
 	}
-
 	fclose(file);
 	printf("저장된 단어 %d개를 불러왔습니다.\n\n", word_count);
 }
 void saveWords() 
 {
-	FILE* file = fopen(FILENAME, "a");
+	FILE* file = fopen(FILENAME, "w");
 
 	if (file == NULL) 
 	{
@@ -130,7 +129,7 @@ void saveWords()
 
 	for (int i = 0; i < word_count; i++) 
 	{
-		fprintf(file, "%s|%s\n", vocabulary[i].english, vocabulary[i].korean, vocabulary[i].wrongcount);
+		fprintf(file, "%s|%s|%d\n", vocabulary[i].english, vocabulary[i].korean, vocabulary[i].wrongcount);
 	}
 
 	fclose(file);
@@ -177,24 +176,6 @@ void toLowerCase(char* str)
 {
 	for (int i = 0; str[i]; i++)
 		str[i] = tolower(str[i]);
-}
-void loadStats()
-{
-	FILE* file = fopen(STATS_FILENAME, "r");
-
-	if (file == NULL)
-		return;
-
-	fscanf(file, "%d %d %d", &stats.totalTests, &stats.totalQuestions, &stats.totalCorrect);
-	fclose(file);
-}
-void saveStats()
-{
-	FILE* file = fopen(STATS_FILENAME, "w");
-
-	if (file == NULL) return;
-	fprintf(file, "%d %d %d", stats.totalTests, stats.totalQuestions, stats.totalCorrect);
-	fclose(file);
 }
 void searchWord()
 {
@@ -305,13 +286,7 @@ void Test()
 
 	free(used);
 
-	// 통계 업데이트
-	stats.totalTests++;
-	stats.totalQuestions += numQuestions;
-	stats.totalCorrect += correct;
-
 	saveWords();  // 틀린 횟수 저장
-	saveStats();  // 통계 저장
 
 	float percentage = (float)correct / numQuestions * 100;
 
@@ -408,51 +383,4 @@ void reviewWrongWords() {
 	printf("===================================\n");
 	printf("복습 결과: %d / %d (%.1f%%)\n", correct, wrongcount, percentage);
 	printf("===================================\n\n");
-}
-
-void showStatistics() {
-	printf("===================================\n");
-	printf("        학습 통계\n");
-	printf("===================================\n");
-	printf("등록된 단어 수: %d개\n", word_count);
-	printf("총 시험 횟수: %d회\n", stats.totalTests);
-	printf("총 문제 수: %d문제\n", stats.totalQuestions);
-	printf("총 정답 수: %d개\n", stats.totalCorrect);
-
-	if (stats.totalQuestions > 0) {
-		float avgCorrect = (float)stats.totalCorrect / stats.totalQuestions * 100;
-		printf("평균 정답률: %.1f%%\n", avgCorrect);
-	}
-
-	// 가장 많이 틀린 단어 3개
-	if (word_count > 0) {
-		printf("\n--- 많이 틀린 단어 TOP 3 ---\n");
-
-		// 간단한 버블 정렬로 상위 3개 찾기
-		int indices[MAX_WORDS];
-		for (int i = 0; i < word_count; i++) {
-			indices[i] = i;
-		}
-
-		for (int i = 0; i < word_count - 1; i++) {
-			for (int j = 0; j < word_count - i - 1; j++) {
-				if (vocabulary[indices[j]].wrongcount < vocabulary[indices[j + 1]].wrongcount) {
-					int temp = indices[j];
-					indices[j] = indices[j + 1];
-					indices[j + 1] = temp;
-				}
-			}
-		}
-
-		int displayCount = (word_count < 3) ? word_count : 3;
-		for (int i = 0; i < displayCount; i++) {
-			int idx = indices[i];
-			if (vocabulary[idx].wrongcount > 0) {
-				printf("%d. %-20s (%d회)\n",
-					i + 1,
-					vocabulary[idx].english,
-					vocabulary[idx].wrongcount);
-			}
-		}
-	}
 }
